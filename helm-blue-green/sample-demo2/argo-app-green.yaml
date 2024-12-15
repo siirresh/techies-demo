@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sample-demo-green
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/siirresh/techies-demo.git'  # Your Helm chart repo URL
+    targetRevision: HEAD
+    path: helm-blue-green
+    helm:
+      values: |
+        image:
+          repository: 044933909280.dkr.ecr.us-east-1.amazonaws.com/sample-repo
+          tag: "v2"  # Green environment tag
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+

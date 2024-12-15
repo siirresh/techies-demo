@@ -1,0 +1,24 @@
+# values.yaml for Blue environment
+image:
+  repository: 044933909280.dkr.ecr.us-east-1.amazonaws.com/sample-repo
+  tag: "latest"  # Blue environment uses the stable version
+
+service:
+  type: ClusterIP
+  port: 80
+
+# Other application-specific configurations
+replicaCount: 2
+
+# values.yaml for Green environment
+image:
+  repository: 044933909280.dkr.ecr.us-east-1.amazonaws.com/sample-repo
+  tag: "8"  # Green environment uses the new version
+
+service:
+  type: ClusterIP
+  port: 80
+
+# Other application-specific configurations
+replicaCount: 2
+

@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sample-demo-ingress-green
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/group.name: my-app-ingress-group
+    alb.ingress.kubernetes.io/group.order: '1'
+spec:
+  rules:
+  - host: sample-demo.servicesmax.com  # Replace with your actual domain
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: sample-demo-green  # Routes traffic to Green environment
+            port:
+              number: 80
+
