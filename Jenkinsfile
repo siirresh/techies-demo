@@ -21,7 +21,7 @@ pipeline {
             stage ("Build Image") {
             steps {
                 script {
-            customimage = docker.build("044933909280.dkr.ecr.us-east-1.amazonaws.com/sample-repo:latest")
+            customimage = docker.build("044933909280.dkr.ecr.us-east-1.amazonaws.com/sample-repo:${BUILD_NUMBER}")
                     //dockerimage = docker.build registry
                     //dockerimage.tag("$BUILD_NUMBER")
                 }
@@ -36,14 +36,14 @@ pipeline {
                 }
             }
         }
-stage('Deployment') {
-           steps {
-                script {
-                   sh '''sed -i  "s/BUILD_NUMBER/\\"v${BUILD_NUMBER}\\"/g" helm-sample-demo/values.yaml '''
-                   sh '''sed  -i  "s/BUILD_NUMBER/\\"v${BUILD_NUMBER}\\"/g" helm-sample-demo/Chart.yaml '''
-                   sh "helm install sample-demo  ./helm-sample-demo/"
-                 }
-                   }
-                }
+#stage('Deployment') {
+ #          steps {
+  #              script {
+   #                sh '''sed -i  "s/BUILD_NUMBER/\\"v${BUILD_NUMBER}\\"/g" helm-sample-demo/values.yaml '''
+    #               sh '''sed  -i  "s/BUILD_NUMBER/\\"v${BUILD_NUMBER}\\"/g" helm-sample-demo/Chart.yaml '''
+     #              sh "helm install sample-demo  ./helm-sample-demo/"
+      #           }
+       #            }
+        #        }
   }
 }
