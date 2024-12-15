@@ -36,14 +36,5 @@ pipeline {
                 }
             }
         }
-#stage('Deployment') {
- #          steps {
-  #              script {
-   #                sh '''sed -i  "s/BUILD_NUMBER/\\"v${BUILD_NUMBER}\\"/g" helm-sample-demo/values.yaml '''
-    #               sh '''sed  -i  "s/BUILD_NUMBER/\\"v${BUILD_NUMBER}\\"/g" helm-sample-demo/Chart.yaml '''
-     #              sh "helm install sample-demo  ./helm-sample-demo/"
-      #           }
-       #            }
-        #        }
   }
 }
