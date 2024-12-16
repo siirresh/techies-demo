@@ -1,0 +1,23 @@
+# values.yaml
+replicaCount: 1
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  name: my-sample-app
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+  host: "my-sample-app.example.com"
+  path: /
+  pathType: Prefix
+  tls: true
+
