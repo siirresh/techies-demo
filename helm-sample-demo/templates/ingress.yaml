@@ -5,10 +5,9 @@ metadata:
   name: {{ include "sample-demo.fullname" . }}
   namespace: {{ .Release.Namespace }}
   annotations:
-    # AWS ALB ingress controller annotations
-    alb.ingress.kubernetes.io/scheme: {{ .Values.ingress.annotations."alb.ingress.kubernetes.io/scheme" }}
-    alb.ingress.kubernetes.io/target-type: {{ .Values.ingress.annotations."alb.ingress.kubernetes.io/target-type" }}
-    alb.ingress.kubernetes.io/success-code: {{ .Values.ingress.annotations."alb.ingress.kubernetes.io/success-code" }}
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/success-code: "200"  # Ensure success code is in quotes
 spec:
   rules:
     {{- range .Values.ingress.hosts }}
