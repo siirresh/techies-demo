@@ -65,11 +65,17 @@ ingress:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-  hosts: 
-    - "sample-demo.ptc.com"  # This was misaligned previously
-  path: /
-  pathType: Prefix
-  tls: true
+    alb.ingress.kubernetes.io/success-code: 200  # Success HTTP status code for health checks
+  hosts:
+    - host: "sample-demo.example.com"  # The host where the app will be accessed, update it as needed
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: sample-demo-service  # The backend service name you want to route to
+              port:
+                number: 80 
   # Uncomment to enable TLS secret
   # tls:
   #   - secretName: chart-example-tls
